@@ -24,7 +24,7 @@ int division_threshold_optimized(vector<int> s , int threshold)
 		int  sum_divisors = 0 ;
 		for(int index = 0 ; index <s.size() ; index++)
 		{
-			sum_divisors += s[index]/mid;
+			sum_divisors += (s[index]+mid -1 )/mid; // correct ceil value 
 		}
 			cout<<"mid is given as " << mid <<"and sum of divisors is given as "<<sum_divisors<<endl;
 		if(sum_divisors == threshold)
