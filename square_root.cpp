@@ -40,11 +40,11 @@ int find_sqaure_root_optimized(int n)
 			else
 			{
 				// we need to move towards the left hand side of the vector 
-				high = (low+high)/2 ;
+				high = (low+high)/2 -1 ;
 			}
 
 		}
-		return -1 ;
+		return (low+high)/2  ;
 }
 int main()
 {
