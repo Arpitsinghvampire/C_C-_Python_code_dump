@@ -52,6 +52,37 @@ vector<int> frog_jump_tabulation_approach(vector<int> height , int k) // bottom 
 
 }
 
+//now lets try solving the above through memoization approach   memoizationis the top bottom approach 
+int frog_jump_memoization_approach(vector<int> height , int index , int j , vector<int> &dp) // index is to find the minmum step to reuce to that index , and j is the timestep 
+{
+	// lets write the base case first 
+	if(index == 1)
+		return 0;
+
+	if(index == 2)
+		return abs(height[1] - height[0]);
+
+	else
+	{
+		//here index >2
+		int min_value = INT_MAX;
+
+		for(int j1 = 1; j1<=j ; j1++)
+		{
+			if(index-j1 >=0)
+			{
+				int other_value = frog_jump_memoization_approach(height , index - j1 , j , dp) + abs(height[index]- height[index-j1]);
+
+				min_value = min(min_value , other_value);
+			}
+		}
+
+		return dp[index] == min_value;
+	}
+
+
+}
+
 int main()
 {
 	vector<int> s {10,5,20,0,15};
@@ -68,5 +99,14 @@ int main()
 		{
 			cout<<" THE MINIMUM ENERGY REQUIRED FOR "<<index+1 <<" POSITION IS GIVEN BY  " <<result[index]<<endl;
 		}
+	}
+
+	vector<int> dp ;
+
+	frog_jump_memoization_approach(s,4 , 2 , dp);
+
+	for(int x : dp)
+	{
+		cout<<x<<endl;
 	}
 }
