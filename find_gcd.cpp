@@ -49,6 +49,30 @@ int alternative_approach(int number1 , int number2)
 
 }
 
+//next we use the euclidean algorithm , which states that 
+//gcd(m , n) = gcd(m-n , n)  //m>n
+
+int gcd_euclidean(int number1  , int number2)
+{
+	//lets find the max and the min among the above numbers 
+	int maximum  = max(number1 , number2);
+
+	if(number1 == number2)
+		return number1;
+	else if(maximum == number1)
+		number1 = number1 -number2;
+	else 
+		number2 = number2 - number1 ;
+
+	// now we have teh largest number , lets now get the largest common divisor , we start from the right 
+	for(int index = min(number1 , number2) ; index>= 1 ; index++)
+		{
+			if(number1%index == 0 && number2%index == 0)
+				return index;
+		}
+	return -1 ; 
+}
+
 int main()
 {
  	int number1 , number2 ;
