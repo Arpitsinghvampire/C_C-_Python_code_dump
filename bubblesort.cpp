@@ -5,7 +5,7 @@
 
 /* HERE WE WRITE THE FUNCTION PROTOTYPE */
 int* bubbleSort(int *array1 , int size);
-
+int* quicksort(int* array1 , int size);
 int main()
 {
  //take the input of the array 
@@ -53,4 +53,11 @@ int* bubbleSort(int* array1 , int size)
     }
  }
   return array1;
+}
+
+//now lets do the same for the quick sort 
+
+int* quicksort(int* array1 , int size)
+{
+  
 }
