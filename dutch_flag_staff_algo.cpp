@@ -50,12 +50,16 @@ int main()
 	//now lets traverse the linked list 
 	node* head0 = new node ;
 	head0 ->data = -1 ;
+	//we need to point the next to null for the termination of the loop 
+	head0 ->next = NULL;
 	node* temp0 = head0; //used for traversing the other list 
 	node* head1 = new node;
 	head1->data = -1 ;
+	head1->next = NULL;
 	node* temp1 = head1;//used for traversing the other list 
 	node* head2 = new node ;
 	head2->data = -1 ;
+	head2->next = NULL;
 	node* temp2 = head2;//used for traversing the other list 
 
 	temp = head ;
