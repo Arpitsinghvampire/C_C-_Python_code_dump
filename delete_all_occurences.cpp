@@ -73,17 +73,23 @@ int main()
 		{
 			//transfer the head to next 
 			node* temp2 = temp1->next;
+			//if there is only one node 
+			//then we dont update to below form 
+			if(temp2)
+			{
+				
 			temp2 ->prev = NULL;
 			temp1->next = NULL;
 			temp1 = temp2;
 			head = temp2;
+			}
 		}
 		else if(temp1->data == number2 && temp1 == tail)
 		{
 			node* temp4 = temp1->prev ;
 			temp4->next = NULL;
 			temp1->prev = NULL;
-			tail = temp1;
+			tail = temp4;
 		}
 		else if(temp1->data == number2 )
 		{
