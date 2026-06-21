@@ -1,109 +1,147 @@
 //conversions_infix_prefix_postfix.cpp
 
-//here in this programme we will convert the infix , prefix and the postfix programmes 
 #include<iostream>
 #include<stack>
+#include<string>
 
 using namespace std;
 
-bool is_operand(char s)
+bool is_operand(char ch)
 {
-	if(s>='a' && s<='z' || s>='A' && s<='Z' || s>=1 && s<=9)
-		return true;
-	return false;
+    return (ch >= 'a' && ch <= 'z') ||
+           (ch >= 'A' && ch <= 'Z') ||
+           (ch >= '0' && ch <= '9');
 }
 
-bool is_operator(char s)
+bool is_operator(char ch)
 {
-	return !is_operand(s);
+    return ch=='+' || ch=='-' ||
+           ch=='*' || ch=='/' ||
+           ch=='^';
 }
 
-
-int return_precedence_order(char s)
+int precedence(char ch)
 {
-	//precedence order is only for the operators 
-	if(is_operator(s))
-	{
-		if(s == '^')
-			return 3;
-		else if( s== '/' || s== '*')
-			return 2;
-		else
-			return 1;
-	}
+    if(ch == '^')
+        return 3;
+    if(ch == '*' || ch == '/')
+        return 2;
+    if(ch == '+' || ch == '-')
+        return 1;
 
-	return 0 ;
+    return 0;
 }
 
-//now we write the function to convert the infix to postfix 
-void convert_infix_to_postfix(string s)
+string convert_infix_to_postfix(string s)
 {
-	string result = "";
-	stack<char> s1 ;
-	for(int index = 0 ; index < s.size() ; index++)
-	{
-		if(is_operand(s[index]))
-			result += s[index] ; //if it is operand directly push into the resulting string 
-		else
-		{
-			//npw you have to push on the stack 
-			if(is_operator(s[index]))
-			{
-				//if the current operator has priority greater than the top you just have to push 
-				///else you would need to pop the top and then push into the resulting string 
-				if(s1.empty())
-				{
-					//push the operator
-					s1.push(s[index]); 
+    stack<char> st;
+    string result = "";
 
-				}
-				else
-				{
-					//check the precedence order of the top 
-					if(return_precedence_order(s[index])> return_precedence_order(s1.top()))
-						s1.push(s[index]);
-					else
-					{
-						if(s[index]!= ')')
-						{
-							result += s1.top();
-							s1.pop();
-							s1.push(s[index]);
-						}
-						else
-						{
-							//you need to pop until you get the enclosing open bracket
-							while(s1.top()!= '(')
-							{
-								result += s1.top();
-								s1.pop();
-							}
-							s1.pop();
-						}
-					}
-				}
-			}
+    for(int i = 0; i < s.size(); i++)
+    {
+        char curr = s[i];
 
-		}
-	}
+        if(is_operand(curr))
+        {
+            result += curr;
+        }
 
-	//after reaching the end you need to pop all the stack values and then push onto the string 
-	while(!s1.empty())
-	{
-		result += s1.top();
-		s1.pop();
-	}
+        else if(curr == '(')
+        {
+            st.push(curr);
+        }
 
-	cout<<"THE FINAL RESULT IS  "<< result<<endl;
+        else if(curr == ')')
+        {
+            while(!st.empty() && st.top() != '(')
+            {
+                result += st.top();
+                st.pop();
+            }
 
-	return ;
+            if(!st.empty())
+                st.pop();      // remove '('
+        }
+
+        else if(is_operator(curr))
+        {
+            while(!st.empty() &&
+                  st.top() != '(' &&
+                  (
+                    precedence(st.top()) > precedence(curr)
+                    ||
+                    (
+                      precedence(st.top()) == precedence(curr)
+                      &&
+                      curr != '^'
+                    )
+                  )
+                 )
+            {
+                result += st.top();
+                st.pop();
+            }
+
+            st.push(curr);
+        }
+    }
+
+    while(!st.empty())
+    {
+        result += st.top();
+        st.pop();
+    }
+
+    return result;
+}
+
+string reverse_string(string s)
+{
+    int left = 0;
+    int right = s.size() - 1;
+
+    while(left < right)
+    {
+        swap(s[left], s[right]);
+        left++;
+        right--;
+    }
+
+    return s;
+}
+
+string convert_infix_to_prefix(string s)
+{
+    string reversed = reverse_string(s);
+
+    for(int i = 0; i < reversed.size(); i++)
+    {
+        if(reversed[i] == '(')
+            reversed[i] = ')';
+        else if(reversed[i] == ')')
+            reversed[i] = '(';
+    }
+
+    string postfix = convert_infix_to_postfix(reversed);
+
+    string prefix = reverse_string(postfix);
+
+    return prefix;
 }
 
 int main()
 {
-	cout<<"ENTER THE STRING YOU WANT TO CONVERT TO POSTFIX FROM INFIX ";
-	string input_string ;
-	cin>>input_string ;
+    cout << "ENTER THE INFIX EXPRESSION : ";
+    string input_string;
+    cin >> input_string;
 
-	convert_infix_to_postfix(input_string);
+    string postfix = convert_infix_to_postfix(input_string);
+
+    cout << "POSTFIX : " << postfix << endl;
+
+    string prefix = convert_infix_to_prefix(input_string);
+
+    cout << "PREFIX  : " << prefix << endl;
+
+    return 0;
 }
