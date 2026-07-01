@@ -64,6 +64,45 @@ void insert_element(node* root , int number )
 	}
 }
 
+//now we try to do the same for the levelorder traversal , everytime , we add a child , we add 1 
+
+void max_depth_levelorder(node* root)
+{
+	node* temp = root;
+	queue<node*> s1 ;
+	//we push the root_node onto the queue;
+	int max_depth = 1 ;
+	s1.push(root);
+
+	while(!s1.empty())
+	{
+		node* front_value = s1.front();
+
+		//we pop the  front value and then append the children 
+		s1.pop();
+
+		//we now add its child 
+		//even if one child is not null , we add 1 
+		if(front_value->left || front_value->right)
+		{
+			max_depth ++ ;
+		}
+		if(front_value->left)
+		{
+			s1.push(front_value->left);
+		}
+		if(front_value->right)
+		{
+			s1.push(front_value->right);
+		}
+
+
+
+	}
+	cout<<"the max depth achieved is "<<max_depth;
+	return;
+}
+
 
 int main()
 {
@@ -101,4 +140,6 @@ int main()
 	int max_depth1 = max_depth(root);
 
 	cout<<"THE MAX DEPTH IS GIVEN AS "<<max_depth1<<endl;
+
+	max_depth_levelorder(root);
 }
