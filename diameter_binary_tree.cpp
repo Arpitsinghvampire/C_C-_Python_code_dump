@@ -28,6 +28,24 @@ int max_height(node* root) //here if you pass the left pointer and the right poi
 	return 1+ max(left_height , right_height);
 }
 
+//here we willuse a more optimized approach and that is , since we can find the height of the node  from the max_height function 
+//we wont use them seperately 
+int findMax(node* root , int maxi)
+{
+	if(root == NULL)
+	{
+		return 0 ;
+	}
+	int left_height = findMax(root->left , maxi);
+	int right_height = findMax(root->right , maxi);
+
+	//lets also update the maximum height we will encounter 
+	maxi = max(maxi , left_height + right_height);
+
+	return 1+ max(left_height, right_height);
+}
+
+
 void insert_element(node* root , int number )
 {
 	node* temp = root;
@@ -96,7 +114,7 @@ void level_order_depth(node* root)
 	}
 
 	//after doing this print the max_diameter
-	cout<<"THE MAX DIAMETER OF THE  ABOVE TREE IS "<<max_dia<<endl;
+	cout<<"THE MAX DIAMETER OF THE  ABOVE TREE IS "<<max_dia+1<<endl;
 }
 
 int main()
@@ -138,4 +156,7 @@ int main()
 	//we have to find the diameter for each node , lets do the level order traversal , and from that we find the max depth 
 	level_order_depth(root);
 
+	int result = findMax(root , 0 );
+
+	cout<<result<<endl;
 }
