@@ -97,11 +97,9 @@ void assign_coordinates(node* root)
 
         for(auto &level : column.second)
         {
-            for(int value : level.second)
-            {
-                cout << value << " ";
-                break;
-            }
+            cout<< *level.second.begin()<<endl; //begin returns the iterator hence we need to dereference it thats why we put the stat
+            //also the first element of the level is the y coordinate , we need the set , which is the second coordinate 
+            //thats why we put the level.second
         }
 
         cout << endl;
