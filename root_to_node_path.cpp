@@ -59,9 +59,7 @@ void insert_element(node* root , int number)
             T->left = NULL;
             T->right = NULL;
 
-            //initialize the coordinates
-            T->x_coordinate = 0;
-            T->y_coordinate = 0;
+           
 
             if(number > temp->data)
             {
