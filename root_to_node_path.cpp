@@ -125,5 +125,10 @@ int main()
    cin>> target;
    node_to_root(root , path_vector , target);
 
+	for(int x: path_vector)
+		{
+			cout<<x<<endl;
+		}
+
     return 0;
 }
