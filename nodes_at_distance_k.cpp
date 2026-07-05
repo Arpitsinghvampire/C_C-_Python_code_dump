@@ -92,7 +92,7 @@ void nodes_at_distance_k(node* root , int number ,int distance_k)
 		
 
 		//we then push the parent 
-		if(find(visited_array.begin() , visited_array.end() , parent_dict[front1]) == visited.end())
+		if(parent_dict[front1] && find(visited_array.begin() , visited_array.end() , parent_dict[front1]) == visited.end())
 		s1.push(parent_dict[front1]);
 
 		distance ++ ;
