@@ -61,7 +61,7 @@ void nodes_at_distance_k(node* root , int number ,int distance_k)
 	//after this step we will have the reference_node and the  parent node , which we can traverse back 
 	//we have to find the node at a distance k 
 	//first we travel backwards and the other forwards
-	queue<node*> visited_array;
+	vector<node*> visited_array;
 
 	queue<node*> s1 ;
 
@@ -75,7 +75,7 @@ void nodes_at_distance_k(node* root , int number ,int distance_k)
 		node* front1 = s1.front();
 
 		s1.pop();
-		visited_array.push(front1);
+		visited_array.push_back(front1);
 
 		if(front1->left)
 		{
