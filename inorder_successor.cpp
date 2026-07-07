@@ -8,6 +8,7 @@ using namespace std;
 void inorder_successor(node* root , int key )
 {
 	int min_node = INT_MAX;
+	int min_node1 = min_node;
 
 	while(root)
 	{
@@ -31,7 +32,15 @@ void inorder_successor(node* root , int key )
 
 		}
 	}
+	if(min_node1 == min_node)
+	{
+		cout<<"NO INORDER SUCCESSOR FOUND "<<endl;
+	}
+	else
+	{
+		cout<<"THE INORDER SUCCESSOR FOR THE NODE IS "<<min_node;
+	}
 
-	cout<<"THE INORDER SUCCESSOR FOR THE NODE IS "<<min_node;
+	
 
 }
