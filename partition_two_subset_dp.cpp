@@ -44,8 +44,15 @@ void subset_sum(vector<int> &s1 , int target , vector<vector<bool>> &dp , int ro
 	}
 
 	//now from the last row , we get all the elements that are true , that is the sum which is possible 
-	vector<int> s2(dp[rows-1]);
+	vector<int> s2;
 	//from here we get each element of the row 
+	for(int index = 0 ; index < columns ; index++)
+	{
+		if(dp[rows-1][index] == true)
+		{
+			s2.push_back(index);
+		}
+	}
 	int minsum = INT_MAX;
 	vector<int> s3;
 	for(int x :s2)
