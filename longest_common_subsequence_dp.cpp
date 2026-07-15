@@ -38,3 +38,36 @@ void longest_common_sequence(str string1 , str string2 , vector<vector<int>> &dp
 		}
 	}
 }
+
+void print_lcs(vector<vector<int>> &dp , string s1 , string s2)
+{
+	string lcs = "";
+
+	int row = dp.size()-1;
+	int column = dp[0].size()-1;
+
+	while(row >=0 && column >=0)
+	{
+		if(s1[row] == s2[column])
+		{
+			lcs += s1[row];
+			row--;
+			column--;
+		}
+
+		else
+		{
+			//we need to find whether we ignore the first strings last element , or the last char of the second string
+			if(dp[row-1][column] > dp[row][column-1])
+			row--;
+
+			else
+			column--; 
+
+		}
+	}
+	//we then need to reverse the above string we got 
+	reverse(lcs.begin() , lcs.end());
+	cout<<lcs;
+}
+
