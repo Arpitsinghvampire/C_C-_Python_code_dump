@@ -7,7 +7,7 @@
 
 using namespace std;
 
-void max_profit(vector<int> stock_price)
+int max_profit(vector<int> stock_price)
 {
 	//some basic intuition , you cannot buy another stock without selling the previous stock 
 	//so i can have a stock today or i dont 
@@ -32,5 +32,7 @@ void max_profit(vector<int> stock_price)
 	    dp[day][0] = max(price[day] + dp[day+1][1] , dp[day+1][0]) //if i wont sell , then i cant buy in the upcoming days 
 	    
 	}
+
+	return max(dp[0][0] , dp[0][1]);
 
 }
