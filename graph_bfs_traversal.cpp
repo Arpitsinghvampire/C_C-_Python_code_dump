@@ -11,7 +11,6 @@ void breadth_first_graph(vector<vector<int>> adj , int starting_node) //here adj
 {
 	map<int , bool> visited ;
 
-	visited[starting_node] = true;
 	//now we explore all the other elements in the queue
 	queue<int> yet_to_be_visited ;
 	yet_to_be_visited.push(starting_node);
@@ -21,7 +20,7 @@ void breadth_first_graph(vector<vector<int>> adj , int starting_node) //here adj
 	while(!yet_to_be_visited.empty())
 	{
 		int front_node = yet_to_be_visited.front();
-
+		visited[front_node] = true;
 		yet_to_be_visited.pop();
 
 		breadth_first_search.push_back(front_node);
