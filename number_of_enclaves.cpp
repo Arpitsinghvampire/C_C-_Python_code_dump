@@ -8,7 +8,7 @@
 #include<iostream>
 #include<stack>
 #include<map>
-#include<pair>
+#include<utility>
 #include<vector>
 
 using namespace std;
@@ -68,10 +68,7 @@ void enclaves(vector<vector<int>> binary_matrix , int rows , int columns)
 				s1.push({present_x-1 ,present_y});
 				visited[present_x-1][present_y] = true;
 			}
-			else
-			{
-				visited[present_x-1][present_y] = true;
-			}
+			
 		}
 
 
@@ -82,10 +79,7 @@ void enclaves(vector<vector<int>> binary_matrix , int rows , int columns)
 				s1.push({present_x+1 ,present_y});
 				visited[present_x+1][present_y] = true;
 			}
-			else
-			{
-				visited[present_x+1][present_y] = true;
-			}
+			
 		}
 
 		if(present_y-1 >=0 && !visited[present_x][present_y-1])
@@ -95,10 +89,7 @@ void enclaves(vector<vector<int>> binary_matrix , int rows , int columns)
 				s1.push({present_x ,present_y-1});
 				visited[present_x][present_y-1] = true;
 			}
-			else
-			{
-				visited[present_x][present_y-1] = true;
-			}
+			
 		}
 
 		if(present_y+1<columns && !visited[present_x][present_y+1])
@@ -108,10 +99,7 @@ void enclaves(vector<vector<int>> binary_matrix , int rows , int columns)
 				s1.push({present_x ,present_y+1});
 				visited[present_x][present_y+1] = true;
 			}
-			else
-			{
-				visited[present_x][present_y+1] = true;
-			}
+			
 		}
 	}
 	int lands = 0 ;
