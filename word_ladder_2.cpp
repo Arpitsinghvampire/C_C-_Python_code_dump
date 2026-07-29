@@ -5,10 +5,10 @@
 #include<queue>
 #include<utility>
 #include<vector>
-
+#include<map>
 using namespace std;
 
-vector<string> get_neighbours(vector<string> vocab_list , string  current_word)
+vector<string> get_neighbours(vector<string> &vocab_list , string  current_word)
 {
 	//the words in the vocab list are all the same lenght
 	vector<string> result ;
@@ -30,7 +30,7 @@ vector<string> get_neighbours(vector<string> vocab_list , string  current_word)
 	return result;
 }
 
-void eligible_patterns(vector<string> vocab_list , string current_word , string final_word)
+void eligible_patterns(vector<string> &vocab_list , string current_word , string final_word)
 {
 	//here we will use the queue data structure 
 	queue<vector<string>> s1;
@@ -60,6 +60,9 @@ void eligible_patterns(vector<string> vocab_list , string current_word , string 
 			}
 
 			cout<<endl;
+
+			s1.pop();
+			continue;
 		}
 
 		vector<string> neighbours = get_neighbours(vocab_list , last_element);
@@ -71,6 +74,7 @@ void eligible_patterns(vector<string> vocab_list , string current_word , string 
 				//then create a new copy of the string
 				vector<string> new_copy(top_string);
 				new_copy.push_back(neighbours[index]);
+				visited[neighbours[index]] = true;
 				s1.push(new_copy);
 			}
 		}
