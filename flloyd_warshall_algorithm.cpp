@@ -10,11 +10,11 @@ using namespace std;
 void flloyd(vector<vector<pair<int , int>>> &adj , int rows , int columns , int current_matrix_index ) //here adj is the adjacency list with entries as the edge weight 
 //when no edge weight exists by default infinity 
 {
-	for(int k = 0 ; k< adj.size() ; k++)
+	for(int k = 0 ; k< adj.size() ; k++) //for the intermediate node 
 	{
-		for(int i = 0 ; i< adj.size() ; i++)
+		for(int i = 0 ; i< adj.size() ; i++) //for the node as the starting node 
 		{
-			for(int j = 0 ; j<adj.size() ; j++)
+			for(int j = 0 ; j<adj.size() ; j++) //for the node as the ending point 
 			{
 				if(adj[i][k] != INT_MAX && adj[k][j] != INT_MAX)
 				{
