@@ -27,8 +27,52 @@ void union_algorithm(vector<int> &size1 , vector<int> &parent , int node1 , int 
 		}
 	}
 }
-void provinces(vector<vector<int> &adj)
+
+bool same_component(vector<int> parent , int node1 , int node2)
 {
+	if(parent[node1] == parent[node2])
+	{
+		return true;
+	}
+	return false;
+}
+//so we need to fins the number of extraneous edges if the number of extraneus edge is greater than the required n-1 then okay else
+//return -1 
+int extraneous_edges(vector<vector<int>> &adj)
+{
+	//we can calculate the number of extra edges by seeing the edges and if the two elements are alreasy in the same component then extra edge 
+	int extra_edge = 0 ;
+	vector<int> parent;
+	vector<int> size1(adj.size() , 0);
+	for(int index = 0 ;index < adj.size() ; index++)
+	{
+		parent.push_back(index);
+	}
+	for(int index = 0 ; index < adj.size() ; index++)
+	{
+		for(int index1 = index ; index1 < adj[0].size() ; index1++)
+		{
+			if(adj[index][index1] ==1) //no self edges 
+			{
+				//first check if they belong to the same component or not 
+				if(parent[index] == parent[index1])
+				{
+					extra_edge ++ ;
+				}
+				else
+				{
+					union_algorithm(size1 , parent , index , index1);
+				}
+				
+			}
+		}
+	}
+	return extra_edge ; 
+
+}
+int   min_operations(vector<vector<int> &adj)
+{
+	int extra_edges = extraneous_edges(adj);
 	vector<int> parent;
 	for(int index = 0 ; index < adj.size() ; index++)
 	{
@@ -48,7 +92,13 @@ void provinces(vector<vector<int> &adj)
 			}
 		}
 	}
-	//after this process just count the number of unique parents 
-	cout<<"THE NUMBER OF CONNECTED COMPONENTS  ARE "<< set(parent.begin() , parent.end());
-	cout<<"THE NUMBER OF OPERATIONS NEEDED IS  "<<set(parent.begin() ,parent.end()).size()-1);
+	set<int> s1(parent.begin() parent.end());
+	if(extra_edge>= s1.size())
+	{
+		return s1.size();
+	}
+	else
+	{
+		return -1 ;
+	}
 }
