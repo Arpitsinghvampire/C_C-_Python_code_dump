@@ -50,5 +50,5 @@ void provinces(vector<vector<int> &adj)
 	}
 	//after this process just count the number of unique parents 
 	cout<<"THE NUMBER OF CONNECTED COMPONENTS  ARE "<< set(parent.begin() , parent.end());
-	cout<<"THE NUMBER OF OPERATIONS NEEDED ARE "<<parent.size()- set(parent.begin() ,parent.end()).size()-1);
+	cout<<"THE NUMBER OF OPERATIONS NEEDED IS  "<<set(parent.begin() ,parent.end()).size()-1);
 }
